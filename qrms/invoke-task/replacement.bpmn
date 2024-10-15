@@ -21,9 +21,6 @@
       </bpmn2:endEvent>
       <bpmn2:sequenceFlow id="Flow_0l41xul" sourceRef="Activity_0gu8v34" targetRef="Event_00p57f2" />
     </bpmn2:subProcess>
-    <bpmn2:boundaryEvent id="Event_0zqvbiq" attachedToRef="Activity_0uh1hyv">
-      <bpmn2:messageEventDefinition id="MessageEventDefinition_0gk21ej" />
-    </bpmn2:boundaryEvent>
   </bpmn2:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
@@ -54,9 +51,6 @@
         <di:waypoint x="830" y="350" />
         <di:waypoint x="902" y="350" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Event_0tga4k9_di" bpmnElement="Event_0zqvbiq">
-        <dc:Bounds x="892" y="432" width="36" height="36" />
-      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn2:definitions>
