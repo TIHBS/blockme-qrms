@@ -2,11 +2,18 @@
 <bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:blockme="https://github.com/TIHBS" id="sample-diagram" targetNamespace="http://bpmn.io/schema/bpmn" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
   <bpmn2:process id="Process_1" isExecutable="true">
     <blockme:invokeSCFunctionTask id="Activity_098igpn" scl="*" signature="*" outputs="*" inArgs="*" isStateful="*" corrId="*" doc="*" />
+    <bpmn2:boundaryEvent id="Event_1g38f4t" attachedToRef="Activity_098igpn">
+      <bpmn2:errorEventDefinition id="ErrorEventDefinition_11noswu" errorRef="Error_0y55f2w" />
+    </bpmn2:boundaryEvent>
   </bpmn2:process>
+  <bpmn2:error id="Error_0y55f2w" name="Error_23cu7nq" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
       <bpmndi:BPMNShape id="Activity_03fwiag_di" bpmnElement="Activity_098igpn">
         <dc:Bounds x="420" y="300" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_19um4es_di" bpmnElement="Event_1g38f4t">
+        <dc:Bounds x="462" y="362" width="36" height="36" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
