@@ -35,13 +35,25 @@ runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + 
         <bpmn2:outgoing>Flow_11oe701</bpmn2:outgoing>
       </bpmn2:receiveTask>
       <bpmn2:sequenceFlow id="Flow_11oe701" sourceRef="Activity_0yg35xq" targetRef="Event_1or7fzu" />
+      <bpmn2:subProcess id="Activity_0e5si61" name="Catch and Retrhow SCIP Error" triggeredByEvent="true">
+        <bpmn2:startEvent id="Event_1cn45fp">
+          <bpmn2:outgoing>Flow_1emqw5n</bpmn2:outgoing>
+          <bpmn2:messageEventDefinition id="MessageEventDefinition_0jv9a5r" messageRef="Message_37nlhdg" />
+        </bpmn2:startEvent>
+        <bpmn2:sequenceFlow id="Flow_1emqw5n" sourceRef="Event_1cn45fp" targetRef="Event_1u627o9" />
+        <bpmn2:endEvent id="Event_1u627o9">
+          <bpmn2:incoming>Flow_1emqw5n</bpmn2:incoming>
+          <bpmn2:errorEventDefinition id="ErrorEventDefinition_1biwuzs" />
+        </bpmn2:endEvent>
+      </bpmn2:subProcess>
     </bpmn2:subProcess>
   </bpmn2:process>
   <bpmn2:message id="Message_30nhvna" name="result_${execution.getProcessInstanceId()}_${corrId}" />
+  <bpmn2:message id="Message_37nlhdg" name="error_${execution.getProcessInstanceId()}_${corrId}" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
       <bpmndi:BPMNShape id="Activity_1liud3x_di" bpmnElement="Activity_1liud3x" isExpanded="true">
-        <dc:Bounds x="370" y="80" width="550" height="180" />
+        <dc:Bounds x="370" y="80" width="550" height="320" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_StartEvent_1" bpmnElement="StartEvent_1">
@@ -58,6 +70,20 @@ runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + 
         <dc:Bounds x="670" y="130" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ecdrcg_di" bpmnElement="Activity_0e5si61" isExpanded="true">
+        <dc:Bounds x="540" y="240" width="200" height="120" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0lit36r_di" bpmnElement="Event_1cn45fp">
+        <dc:Bounds x="580" y="302" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0vicjbr_di" bpmnElement="Event_1u627o9">
+        <dc:Bounds x="672" y="302" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1emqw5n_di" bpmnElement="Flow_1emqw5n">
+        <di:waypoint x="616" y="320" />
+        <di:waypoint x="672" y="320" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0vvy7qm_di" bpmnElement="Flow_0vvy7qm">
         <di:waypoint x="448" y="170" />
         <di:waypoint x="500" y="170" />
