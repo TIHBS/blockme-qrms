@@ -35,7 +35,7 @@ runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + 
         <bpmn2:outgoing>Flow_11oe701</bpmn2:outgoing>
       </bpmn2:receiveTask>
       <bpmn2:sequenceFlow id="Flow_11oe701" sourceRef="Activity_0yg35xq" targetRef="Event_1or7fzu" />
-      <bpmn2:subProcess id="Activity_1bkat3q" name="Catch and Retrhow SCIP Error" triggeredByEvent="true">
+      <bpmn2:subProcess id="Activity_1bkat3q" name="Catch and Rethrow SCIP Error" triggeredByEvent="true">
         <bpmn2:startEvent id="Event_0jdsc2o">
           <bpmn2:outgoing>Flow_1pxr7hj</bpmn2:outgoing>
           <bpmn2:messageEventDefinition id="MessageEventDefinition_01dqg5g" messageRef="Message_2kqoepv" />
