@@ -43,13 +43,10 @@ runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + 
         <bpmn2:sequenceFlow id="Flow_1a1ew47" sourceRef="Event_04k9w7c" targetRef="Event_1f14a64" />
         <bpmn2:endEvent id="Event_1f14a64">
           <bpmn2:incoming>Flow_1a1ew47</bpmn2:incoming>
-          <bpmn2:escalationEventDefinition id="EscalationEventDefinition_19ppxpv" escalationRef="Escalation_2upkc4h" />
+          <bpmn2:errorEventDefinition id="ErrorEventDefinition_0rw7gnx" />
         </bpmn2:endEvent>
       </bpmn2:subProcess>
     </bpmn2:subProcess>
-    <bpmn2:boundaryEvent id="Event_0sb6l7o" attachedToRef="Activity_1liud3x">
-      <bpmn2:escalationEventDefinition id="EscalationEventDefinition_04ozcza" escalationRef="Escalation_2upkc4h" />
-    </bpmn2:boundaryEvent>
   </bpmn2:process>
   <bpmn2:message id="Message_30nhvna" name="result_${execution.getProcessInstanceId()}_${corrId}" />
   <bpmn2:escalation id="Escalation_2upkc4h" name="Escalation_2upkc4h" escalationCode="Escalation_2upkc4h" />
@@ -79,7 +76,7 @@ runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + 
       <bpmndi:BPMNShape id="Event_06nq6z9_di" bpmnElement="Event_04k9w7c">
         <dc:Bounds x="560" y="302" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1iepwsc_di" bpmnElement="Event_1f14a64">
+      <bpmndi:BPMNShape id="Event_05v8nkq_di" bpmnElement="Event_1f14a64">
         <dc:Bounds x="652" y="302" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1a1ew47_di" bpmnElement="Flow_1a1ew47">
@@ -98,9 +95,6 @@ runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + 
         <di:waypoint x="770" y="170" />
         <di:waypoint x="832" y="170" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Event_062w2a9_di" bpmnElement="Event_0sb6l7o">
-        <dc:Bounds x="812" y="382" width="36" height="36" />
-      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn2:definitions>
