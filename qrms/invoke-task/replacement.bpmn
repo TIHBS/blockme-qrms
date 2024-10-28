@@ -35,7 +35,7 @@ runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + 
         <bpmn2:outgoing>Flow_11oe701</bpmn2:outgoing>
       </bpmn2:receiveTask>
       <bpmn2:sequenceFlow id="Flow_11oe701" sourceRef="Activity_0yg35xq" targetRef="Event_1or7fzu" />
-      <bpmn2:subProcess id="Activity_1kgkamf" name="Catch and Rethrow SCIP Error" triggeredByEvent="true">
+      <bpmn2:subProcess id="Activity_1kgkamf" name="Catch and Rethrow Async SCIP Error" triggeredByEvent="true">
         <bpmn2:startEvent id="Event_04k9w7c">
           <bpmn2:outgoing>Flow_1a1ew47</bpmn2:outgoing>
           <bpmn2:messageEventDefinition id="MessageEventDefinition_010t2j5" messageRef="Message_0m7hc0t" />
@@ -46,6 +46,15 @@ runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + 
           <bpmn2:errorEventDefinition id="ErrorEventDefinition_0rw7gnx" />
         </bpmn2:endEvent>
       </bpmn2:subProcess>
+      <bpmn2:boundaryEvent id="Event_0rx0lai" attachedToRef="Activity_1e0x14p">
+        <bpmn2:outgoing>Flow_14nlzt0</bpmn2:outgoing>
+        <bpmn2:errorEventDefinition id="ErrorEventDefinition_12bt91a" />
+      </bpmn2:boundaryEvent>
+      <bpmn2:sequenceFlow id="Flow_14nlzt0" sourceRef="Event_0rx0lai" targetRef="Event_0f44e0a" />
+      <bpmn2:endEvent id="Event_0f44e0a" name="Rethrow Sync SCIP Error">
+        <bpmn2:incoming>Flow_14nlzt0</bpmn2:incoming>
+        <bpmn2:errorEventDefinition id="ErrorEventDefinition_1s4c4sn" />
+      </bpmn2:endEvent>
     </bpmn2:subProcess>
   </bpmn2:process>
   <bpmn2:message id="Message_30nhvna" name="result_${execution.getProcessInstanceId()}_${corrId}" />
@@ -54,7 +63,7 @@ runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + 
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
       <bpmndi:BPMNShape id="Activity_1liud3x_di" bpmnElement="Activity_1liud3x" isExpanded="true">
-        <dc:Bounds x="390" y="80" width="500" height="320" />
+        <dc:Bounds x="390" y="80" width="590" height="320" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_StartEvent_1" bpmnElement="StartEvent_1">
@@ -71,20 +80,29 @@ runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + 
         <dc:Bounds x="670" y="130" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_00580ec_di" bpmnElement="Event_0f44e0a">
+        <dc:Bounds x="592" y="272" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="576" y="315" width="69" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0asjqzk_di" bpmnElement="Activity_1kgkamf" isExpanded="true">
-        <dc:Bounds x="520" y="250" width="210" height="120" />
+        <dc:Bounds x="670" y="250" width="210" height="120" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_06nq6z9_di" bpmnElement="Event_04k9w7c">
-        <dc:Bounds x="560" y="302" width="36" height="36" />
+        <dc:Bounds x="710" y="302" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_05v8nkq_di" bpmnElement="Event_1f14a64">
-        <dc:Bounds x="652" y="302" width="36" height="36" />
+        <dc:Bounds x="802" y="302" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1a1ew47_di" bpmnElement="Flow_1a1ew47">
-        <di:waypoint x="596" y="320" />
-        <di:waypoint x="652" y="320" />
+        <di:waypoint x="746" y="320" />
+        <di:waypoint x="802" y="320" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_02sxgkn_di" bpmnElement="Event_0rx0lai">
+        <dc:Bounds x="532" y="192" width="36" height="36" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0vvy7qm_di" bpmnElement="Flow_0vvy7qm">
         <di:waypoint x="448" y="170" />
         <di:waypoint x="500" y="170" />
@@ -96,6 +114,11 @@ runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + 
       <bpmndi:BPMNEdge id="Flow_11oe701_di" bpmnElement="Flow_11oe701">
         <di:waypoint x="770" y="170" />
         <di:waypoint x="832" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14nlzt0_di" bpmnElement="Flow_14nlzt0">
+        <di:waypoint x="550" y="228" />
+        <di:waypoint x="550" y="290" />
+        <di:waypoint x="592" y="290" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

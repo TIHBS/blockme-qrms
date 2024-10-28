@@ -35,7 +35,7 @@ runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + 
         <bpmn2:outgoing>Flow_11oe701</bpmn2:outgoing>
       </bpmn2:receiveTask>
       <bpmn2:sequenceFlow id="Flow_11oe701" sourceRef="Activity_0yg35xq" targetRef="Event_1or7fzu" />
-      <bpmn2:subProcess id="Activity_0k4u3w3" name="Catch and Rethrow SCIP Error" triggeredByEvent="true">
+      <bpmn2:subProcess id="Activity_0k4u3w3" name="Catch and Rethrow Async SCIP Error" triggeredByEvent="true">
         <bpmn2:startEvent id="Event_09nlvqu">
           <bpmn2:outgoing>Flow_0m2hjca</bpmn2:outgoing>
           <bpmn2:messageEventDefinition id="MessageEventDefinition_1q3b87m" messageRef="Message_1k1kn8q" />
@@ -46,6 +46,15 @@ runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + 
           <bpmn2:errorEventDefinition id="ErrorEventDefinition_06v53jn" />
         </bpmn2:endEvent>
       </bpmn2:subProcess>
+      <bpmn2:boundaryEvent id="Event_07bo1hw" attachedToRef="Activity_1e0x14p">
+        <bpmn2:outgoing>Flow_1lo63gv</bpmn2:outgoing>
+        <bpmn2:errorEventDefinition id="ErrorEventDefinition_1hd09td" />
+      </bpmn2:boundaryEvent>
+      <bpmn2:sequenceFlow id="Flow_1lo63gv" sourceRef="Event_07bo1hw" targetRef="Event_0g4o4wk" />
+      <bpmn2:endEvent id="Event_0g4o4wk" name="Rethrow Sync SCIP Error">
+        <bpmn2:incoming>Flow_1lo63gv</bpmn2:incoming>
+        <bpmn2:errorEventDefinition id="ErrorEventDefinition_066ncf1" />
+      </bpmn2:endEvent>
     </bpmn2:subProcess>
   </bpmn2:process>
   <bpmn2:message id="Message_30nhvna" name="result_${execution.getProcessInstanceId()}_${corrId}" />
@@ -70,20 +79,29 @@ runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + 
         <dc:Bounds x="510" y="160" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_02punxs_di" bpmnElement="Event_0g4o4wk">
+        <dc:Bounds x="462" y="302" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="446" y="345" width="69" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_16bq4ze_di" bpmnElement="Activity_0k4u3w3" isExpanded="true">
-        <dc:Bounds x="380" y="270" width="200" height="120" />
+        <dc:Bounds x="520" y="270" width="200" height="120" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_03ory4d_di" bpmnElement="Event_09nlvqu">
-        <dc:Bounds x="420" y="322" width="36" height="36" />
+        <dc:Bounds x="560" y="322" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0xkhbq0_di" bpmnElement="Event_0xs3wap">
-        <dc:Bounds x="512" y="322" width="36" height="36" />
+        <dc:Bounds x="652" y="322" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0m2hjca_di" bpmnElement="Flow_0m2hjca">
-        <di:waypoint x="456" y="340" />
-        <di:waypoint x="512" y="340" />
+        <di:waypoint x="596" y="340" />
+        <di:waypoint x="652" y="340" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_011k7w2_di" bpmnElement="Event_07bo1hw">
+        <dc:Bounds x="372" y="222" width="36" height="36" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0vvy7qm_di" bpmnElement="Flow_0vvy7qm">
         <di:waypoint x="288" y="200" />
         <di:waypoint x="340" y="200" />
@@ -95,6 +113,11 @@ runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + 
       <bpmndi:BPMNEdge id="Flow_11oe701_di" bpmnElement="Flow_11oe701">
         <di:waypoint x="610" y="200" />
         <di:waypoint x="672" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1lo63gv_di" bpmnElement="Flow_1lo63gv">
+        <di:waypoint x="390" y="258" />
+        <di:waypoint x="390" y="320" />
+        <di:waypoint x="462" y="320" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

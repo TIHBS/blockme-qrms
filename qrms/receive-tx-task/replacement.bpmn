@@ -46,7 +46,7 @@ runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + 
           <bpmn2:errorEventDefinition id="ErrorEventDefinition_0vffkc6" />
         </bpmn2:endEvent>
       </bpmn2:subProcess>
-      <bpmn2:boundaryEvent id="Event_050icji" name="Catch Sync SCIP Error" attachedToRef="Activity_1e0x14p">
+      <bpmn2:boundaryEvent id="Event_050icji" attachedToRef="Activity_1e0x14p">
         <bpmn2:outgoing>Flow_0tanl65</bpmn2:outgoing>
         <bpmn2:errorEventDefinition id="ErrorEventDefinition_0e3xl2w" />
       </bpmn2:boundaryEvent>
