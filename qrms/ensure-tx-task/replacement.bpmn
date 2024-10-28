@@ -41,7 +41,7 @@ runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + 
             <camunda:executionListener event="end">
               <camunda:script scriptFormat="groovy">def logger = org.slf4j.LoggerFactory.getLogger('test');
 
-logger.info("****** EnsureTxState Task ******:\nReceived asynchronous SCIP error: errorCode=" + execution.getVariable("errorCode") + "errorMessage=" + execution.getVariable("errorMessage"));
+logger.info("\n\n****** EnsureTxState Task ******:\nReceived asynchronous SCIP error: errorCode=" + execution.getVariable("errorCode") + "errorMessage=" + execution.getVariable("errorMessage") + "\n");
 
 runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + "_errorCode", execution.getVariable("errorCode"));</camunda:script>
             </camunda:executionListener>

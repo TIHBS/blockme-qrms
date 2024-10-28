@@ -25,7 +25,7 @@
           <camunda:executionListener event="end">
             <camunda:script scriptFormat="groovy">def logger = org.slf4j.LoggerFactory.getLogger('test');
 
-logger.info("Task " + execution.getParentId() + " received result: " + execution.getVariable("return"));
+logger.info("\n\n****** SendTx Task ******:\nReceived asynchronous response: " + execution.getVariable("return") + "\n");
 
 runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + "_result", execution.getVariable("return"));</camunda:script>
           </camunda:executionListener>
@@ -37,6 +37,15 @@ runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + 
       <bpmn2:sequenceFlow id="Flow_11oe701" sourceRef="Activity_0yg35xq" targetRef="Event_1or7fzu" />
       <bpmn2:subProcess id="Activity_0k4u3w3" name="Catch and Rethrow Async SCIP Error" triggeredByEvent="true">
         <bpmn2:startEvent id="Event_09nlvqu">
+          <bpmn2:extensionElements>
+            <camunda:executionListener event="end">
+              <camunda:script scriptFormat="groovy">def logger = org.slf4j.LoggerFactory.getLogger('test');
+
+logger.info("\n\n****** SendTx Task ******:\nReceived asynchronous SCIP error: errorCode=" + execution.getVariable("errorCode") + "errorMessage=" + execution.getVariable("errorMessage") + "\n");
+
+runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + "_errorCode", execution.getVariable("errorCode"));</camunda:script>
+            </camunda:executionListener>
+          </bpmn2:extensionElements>
           <bpmn2:outgoing>Flow_0m2hjca</bpmn2:outgoing>
           <bpmn2:messageEventDefinition id="MessageEventDefinition_1q3b87m" messageRef="Message_1k1kn8q" />
         </bpmn2:startEvent>
@@ -62,62 +71,62 @@ runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + 
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
       <bpmndi:BPMNShape id="Activity_1liud3x_di" bpmnElement="Activity_1liud3x" isExpanded="true">
-        <dc:Bounds x="210" y="110" width="550" height="330" />
+        <dc:Bounds x="160" y="110" width="550" height="330" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_StartEvent_1" bpmnElement="StartEvent_1">
-        <dc:Bounds x="252" y="182" width="36" height="36" />
+        <dc:Bounds x="202" y="182" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_09tea8j_di" bpmnElement="Activity_1e0x14p">
-        <dc:Bounds x="340" y="160" width="100" height="80" />
+        <dc:Bounds x="290" y="160" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1or7fzu_di" bpmnElement="Event_1or7fzu">
-        <dc:Bounds x="672" y="182" width="36" height="36" />
+        <dc:Bounds x="622" y="182" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1plf2ub_di" bpmnElement="Activity_0yg35xq">
-        <dc:Bounds x="510" y="160" width="100" height="80" />
+        <dc:Bounds x="460" y="160" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_02punxs_di" bpmnElement="Event_0g4o4wk">
+        <dc:Bounds x="412" y="302" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="396" y="345" width="69" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_16bq4ze_di" bpmnElement="Activity_0k4u3w3" isExpanded="true">
-        <dc:Bounds x="520" y="270" width="200" height="120" />
+        <dc:Bounds x="470" y="270" width="200" height="120" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_03ory4d_di" bpmnElement="Event_09nlvqu">
-        <dc:Bounds x="560" y="322" width="36" height="36" />
+        <dc:Bounds x="510" y="322" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0xkhbq0_di" bpmnElement="Event_0xs3wap">
-        <dc:Bounds x="652" y="322" width="36" height="36" />
+        <dc:Bounds x="602" y="322" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0m2hjca_di" bpmnElement="Flow_0m2hjca">
-        <di:waypoint x="596" y="340" />
-        <di:waypoint x="652" y="340" />
+        <di:waypoint x="546" y="340" />
+        <di:waypoint x="602" y="340" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Event_02punxs_di" bpmnElement="Event_0g4o4wk">
-        <dc:Bounds x="462" y="302" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="446" y="345" width="69" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_011k7w2_di" bpmnElement="Event_07bo1hw">
-        <dc:Bounds x="372" y="222" width="36" height="36" />
+        <dc:Bounds x="322" y="222" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0vvy7qm_di" bpmnElement="Flow_0vvy7qm">
-        <di:waypoint x="288" y="200" />
-        <di:waypoint x="340" y="200" />
+        <di:waypoint x="238" y="200" />
+        <di:waypoint x="290" y="200" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0xvoq5t_di" bpmnElement="Flow_0xvoq5t">
-        <di:waypoint x="440" y="200" />
-        <di:waypoint x="510" y="200" />
+        <di:waypoint x="390" y="200" />
+        <di:waypoint x="460" y="200" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_11oe701_di" bpmnElement="Flow_11oe701">
-        <di:waypoint x="610" y="200" />
-        <di:waypoint x="672" y="200" />
+        <di:waypoint x="560" y="200" />
+        <di:waypoint x="622" y="200" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1lo63gv_di" bpmnElement="Flow_1lo63gv">
-        <di:waypoint x="390" y="258" />
-        <di:waypoint x="390" y="320" />
-        <di:waypoint x="462" y="320" />
+        <di:waypoint x="340" y="258" />
+        <di:waypoint x="340" y="320" />
+        <di:waypoint x="412" y="320" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
