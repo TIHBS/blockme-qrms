@@ -25,7 +25,7 @@
           <camunda:executionListener event="end">
             <camunda:script scriptFormat="groovy">def logger = org.slf4j.LoggerFactory.getLogger('test');
 
-logger.info("Task " + execution.getParentId() + " received result: " + execution.getVariable("return"));
+logger.info("****** EnsureTxState Task ******:\nReceived asynchronous response: " + execution.getVariable("return"));
 
 runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + "_result", execution.getVariable("return"));</camunda:script>
           </camunda:executionListener>
@@ -37,6 +37,15 @@ runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + 
       <bpmn2:sequenceFlow id="Flow_11oe701" sourceRef="Activity_0yg35xq" targetRef="Event_1or7fzu" />
       <bpmn2:subProcess id="Activity_0e5si61" name="Catch and Rethrow Async SCIP Error" triggeredByEvent="true">
         <bpmn2:startEvent id="Event_1cn45fp">
+          <bpmn2:extensionElements>
+            <camunda:executionListener event="end">
+              <camunda:script scriptFormat="groovy">def logger = org.slf4j.LoggerFactory.getLogger('test');
+
+logger.info("****** EnsureTxState Task ******:\nReceived asynchronous SCIP error: errorCode=" + execution.getVariable("errorCode") + "errorMessage=" + execution.getVariable("errorMessage"));
+
+runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + "_errorCode", execution.getVariable("errorCode"));</camunda:script>
+            </camunda:executionListener>
+          </bpmn2:extensionElements>
           <bpmn2:outgoing>Flow_1emqw5n</bpmn2:outgoing>
           <bpmn2:messageEventDefinition id="MessageEventDefinition_0jv9a5r" messageRef="Message_37nlhdg" />
         </bpmn2:startEvent>
