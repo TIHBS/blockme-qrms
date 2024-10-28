@@ -58,7 +58,7 @@ runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + 
     </bpmn2:subProcess>
   </bpmn2:process>
   <bpmn2:message id="Message_30nhvna" name="result_${execution.getProcessInstanceId()}_${corrId}" />
-  <bpmn2:message id="Message_2kqoepv" name="error_${execution.getProcessInstanceId()}_${execution.getVariable(&#39;corrId&#39;)}" />
+  <bpmn2:message id="Message_2kqoepv" name="error_${execution.getProcessInstanceId()}_${corrId}" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
       <bpmndi:BPMNShape id="Activity_1liud3x_di" bpmnElement="Activity_1liud3x" isExpanded="true">

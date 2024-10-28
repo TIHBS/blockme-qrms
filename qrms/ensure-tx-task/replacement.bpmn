@@ -58,7 +58,7 @@ runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + 
     </bpmn2:subProcess>
   </bpmn2:process>
   <bpmn2:message id="Message_30nhvna" name="result_${execution.getProcessInstanceId()}_${corrId}" />
-  <bpmn2:message id="Message_37nlhdg" name="error_${execution.getProcessInstanceId()}_${execution.getVariable(&#39;corrId&#39;)}" />
+  <bpmn2:message id="Message_37nlhdg" name="error_${execution.getProcessInstanceId()}_${corrId}" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
       <bpmndi:BPMNShape id="Activity_1liud3x_di" bpmnElement="Activity_1liud3x" isExpanded="true">
@@ -79,12 +79,6 @@ runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + 
         <dc:Bounds x="670" y="130" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0jt7r55_di" bpmnElement="Event_1yfldsk">
-        <dc:Bounds x="632" y="272" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="618" y="315" width="69" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1ecdrcg_di" bpmnElement="Activity_0e5si61" isExpanded="true">
         <dc:Bounds x="700" y="240" width="200" height="120" />
         <bpmndi:BPMNLabel />
@@ -99,6 +93,12 @@ runtimeService.setVariable(execution.getId(), execution.getVariable("corrId") + 
         <di:waypoint x="776" y="320" />
         <di:waypoint x="832" y="320" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0jt7r55_di" bpmnElement="Event_1yfldsk">
+        <dc:Bounds x="632" y="272" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="618" y="315" width="69" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1fy1qvx_di" bpmnElement="Event_0nwxc86">
         <dc:Bounds x="542" y="192" width="36" height="36" />
       </bpmndi:BPMNShape>
