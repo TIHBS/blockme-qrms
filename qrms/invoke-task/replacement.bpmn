@@ -8,7 +8,7 @@
       <bpmn2:startEvent id="StartEvent_1">
         <bpmn2:outgoing>Flow_0vvy7qm</bpmn2:outgoing>
       </bpmn2:startEvent>
-      <bpmn2:serviceTask id="Activity_1e0x14p" name="Send Invoke Request" camunda:class="scip.connector.task.SendInvokeRequestTask">
+      <bpmn2:serviceTask id="Activity_1e0x14p" name="Send Invoke Request" camunda:asyncBefore="true" camunda:class="scip.connector.task.SendInvokeRequestTask">
         <bpmn2:extensionElements>
           <camunda:inputOutput />
         </bpmn2:extensionElements>
@@ -20,7 +20,7 @@
       </bpmn2:endEvent>
       <bpmn2:sequenceFlow id="Flow_0vvy7qm" sourceRef="StartEvent_1" targetRef="Activity_1e0x14p" />
       <bpmn2:sequenceFlow id="Flow_0xvoq5t" sourceRef="Activity_1e0x14p" targetRef="Activity_0yg35xq" />
-      <bpmn2:receiveTask id="Activity_0yg35xq" name="Receive Invoke Response" messageRef="Message_30nhvna">
+      <bpmn2:receiveTask id="Activity_0yg35xq" name="Receive Invoke Response" camunda:asyncAfter="true" messageRef="Message_30nhvna">
         <bpmn2:extensionElements>
           <camunda:executionListener event="end">
             <camunda:script scriptFormat="groovy">def logger = org.slf4j.LoggerFactory.getLogger('test');
